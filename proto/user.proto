@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package ecommerce;
+
+import "proto/common.proto";
+
+option go_package = "./user";
+
+service UserService {
+    rpc CreateUser (CreateUserRequest) returns (UserResponse);
+    rpc GetUser (GetUserRequest) returns (UserResponse);
+    rpc ListUsers (ecommerce.Empty) returns (UserListResponse);
+}
+
+message User {
+    string id = 1;
+    string name = 2;
+    string email = 3;
+}
+
+message CreateUserRequest {
+    string name = 1;
+    string email = 2;
+}
+
+message GetUserRequest {
+    string id = 1;
+}
+
+message UserResponse {
+    User user = 1;
+}
+
+message UserListResponse {
+    repeated User users = 1;
+}

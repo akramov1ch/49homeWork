@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package ecommerce;
+
+import "proto/common.proto";
+
+option go_package = "./order";
+
+service OrderService {
+    rpc CreateOrder (CreateOrderRequest) returns (OrderResponse);
+    rpc GetOrder (GetOrderRequest) returns (OrderResponse);
+    rpc ListOrders (ecommerce.Empty) returns (OrderListResponse);
+}
+
+message Order {
+    string id = 1;
+    string user_id = 2;
+    string product_name = 3;
+    int32 quantity = 4;
+    double price = 5;
+}
+
+message CreateOrderRequest {
+    string user_id = 1;
+    string product_name = 2;
+    int32 quantity = 3;
+}
+
+message GetOrderRequest {
+    string id = 1;
+}
+
+message OrderResponse {
+    Order order = 1;
+}
+
+message OrderListResponse {
+    repeated Order orders = 1;
+}
